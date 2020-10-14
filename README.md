@@ -85,3 +85,9 @@ npm start
 cnpm install react-router-dom -S
 cnpm install redux react-redux -S
 ```
+
+```sh
+# 使用npm包的方式配置redux-devtools，也可以用替代方案window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+cnpm install redux-devtools-extension -D
+# composeWithDevTools()
+```
