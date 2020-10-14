@@ -66,3 +66,22 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+> 基于 create-react-app 搭建 react 全家桶项目（react-router,redux）,ui 库使用 antd-design，封装路由，redux 的 store，hooks 用法
+
+### 初始化
+
+```sh
+npx create-react-app react-hooks
+cd react-hooks
+npm start
+```
+
+- add router,redux
+
+```sh
+# cnpm install react-router -S
+# react-router 是基础库，react-router-dom是搭配react在web端的库
+cnpm install react-router-dom -S
+cnpm install redux react-redux -S
+```
