@@ -1,4 +1,5 @@
 import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const initialState = {
   count: 11
@@ -19,6 +20,12 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// const store = createStore(reducer, 
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// chrome的devtools工具配置：
+// 法1.window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// 法2.使用npm包（redux-devtools-extension）肿的composeWithDevTools()方法
+const store = createStore(reducer,
+  composeWithDevTools())
 
 export default store
