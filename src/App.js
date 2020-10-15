@@ -48,15 +48,18 @@ function renderRoute () {
   // 扁平化的routes，遍历生成route
   console.log('renderRoute')
   const routeList = routes
-  return routeList.map((item, index) => {
-    return (
-      <WrapRouter key={index} {...item} />
-    )
-  })
+
+  // return routeList.map((item, index) => {
+  //   return (
+  //     <WrapRouter key={index} {...item} />
+  //   )
+  // })
+  // 优化route的生成
+  return <WrapRouter routeList={routeList} />
 }
 let trueRoute = null
 function Layout () {
-  console.log('layout update')
+  // console.log('layout update')
   if (!trueRoute) {
     trueRoute = renderRoute()
   }
