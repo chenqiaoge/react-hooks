@@ -52,9 +52,22 @@ function calcRouteList () {
   console.log('renderRoute')
   const routesIdArr = routesApi.map((item) => item.id)
   console.log('routesIdArr:', routesIdArr)
-  // 计算权限的routes，遍历生成route，目前适用一级菜单方式
-  return routes.filter(({ id }) => routesIdArr.includes(id))
-
+  // 计算权限的routes，遍历生成route，
+  // 进行扁平化处理
+  const flatRoutes = []
+  routes.filter(({ id }) => routesIdArr.includes(id)).forEach(routeItem => {
+    const { childrens = [], ...self } = routeItem
+    const childArr = []
+    childrens.forEach(child => {
+      if (child.auth === 'false') {
+        // 子集菜单模块的细分权限路由，待完善
+        return
+      }
+      childArr.push(child)
+    });
+    flatRoutes.push(self, ...childArr)
+  });
+  return flatRoutes
 }
 function renderMenu (menuLists) {
   return menuLists.map((item, index) => {

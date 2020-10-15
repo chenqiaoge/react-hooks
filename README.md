@@ -96,9 +96,11 @@ cnpm install redux-devtools-extension -D
 
   - 路由组件拆分，全量引入组件，可切换，done
   - 懒加载组件（react-loadable），路由拦截，done
-  - 权限路由，？
+  - 权限路由，？half
   - 路由搭配面包屑的自动化？half
 
 - 添加 axios，config，loading
+
+- store demo 样例
 
 - dnd 拖拽

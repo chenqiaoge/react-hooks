@@ -29,8 +29,21 @@ export default [
     childrens: [
       {
         path: '/home/test',
+        id: '1-1',
         meta: {
           label: 'test'
+        },
+        component: Loadable({
+          loader: () => import('../views/home/list'),
+          loading: Loading
+        })
+      },
+      {
+        path: '/home/test',
+        id: '1-2',
+        auth: 'false',
+        meta: {
+          label: 'test1',
         },
         component: Loadable({
           loader: () => import('../views/home/list'),
