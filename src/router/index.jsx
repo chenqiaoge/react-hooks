@@ -1,16 +1,23 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import routes from './routeConfig'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom'
+// import routes from './routeConfig'
 
+// 每个路由都在这里create，可以在钩子中做拦截
 export default function WrapRouter(props) {
-  console.log(props, routes)
-  const route = routes.map((item) => {
-    // console.log(item)
-    const Component = item.component
-    return (
-      <Route path={item.path} exact={item.exact} key={item.path} render={() => <Component />} />
-    )
-  })
+  console.log(props)
+  function changeBread() {
+    console.log('change store bread')
+  }
+  let location = useLocation()
+  useEffect(() => {
+    console.log('effect route Update', location.pathname)
+    changeBread()
+  }, [location.pathname])
+
+  // const Component = props.component
+  // const route = <Route {...rest} render={() => <Component /> />
+  const { ...rest } = props
+  const route = <Route {...rest} />
   return (
     <Switch>
       {route}

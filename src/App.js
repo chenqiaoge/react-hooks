@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './App.css';
 import Home from './views/home'
 import WrapRouter from './router'
+import routes from './router/routeConfig' // 全量routes
 
 function App () {
   return (
@@ -27,37 +28,56 @@ function App () {
   );
 }
 
-function About () {
-  return (
-    <div className="About">
-      about
-    </div>
-  )
+// function About () {
+//   return (
+//     <div className="About">
+//       about
+//     </div>
+//   )
+// }
+// function Inbox () {
+//   return (
+//     <div className="Inbox">
+//       Inbox
+//     </div>
+//   )
+// }
+
+// renderRoute
+function renderRoute () {
+  // 扁平化的routes，遍历生成route
+  console.log('renderRoute')
+  const routeList = routes
+  return routeList.map((item, index) => {
+    return (
+      <WrapRouter key={index} {...item} />
+    )
+  })
 }
-function Inbox () {
-  return (
-    <div className="Inbox">
-      Inbox
-    </div>
-  )
-}
+let trueRoute = null
 function Layout () {
+  console.log('layout update')
+  if (!trueRoute) {
+    trueRoute = renderRoute()
+  }
   return (
     <div className="layout">
 
-      <Router>
-        <ul>
-          <li><Link to="/">home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/inbox">Inbox</Link></li>
-        </ul>
-        {/* <Switch>
+      {/* <Router> */}
+      <ul>
+        <li><Link to="/login">login</Link></li>
+        <li><Link to="/">home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/inbox">Inbox</Link></li>
+      </ul>
+      {trueRoute}
+      {/* <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/inbox" component={Inbox} />
         </Switch> */}
-        <WrapRouter />
-      </Router>
+      {/* <WrapRouter /> */}
+      {/* </Router> */}
     </div>
   )
 }
