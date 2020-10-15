@@ -99,7 +99,7 @@ cnpm install redux-devtools-extension -D
   - 权限路由，？half
   - 路由搭配面包屑的自动化？half
 
-- 对默认 webpack 自定义配置 -?
+- 对默认 webpack 自定义配置 -?half
 
   ```sh
   cnpm install customize-cra react-app-rewired -D

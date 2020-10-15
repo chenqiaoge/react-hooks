@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import store from '../store' // store直接引用
-import { handleAddCount } from '../store/actions'
+import store from '@/store' // store直接引用
+import { handleAddCount } from '@/store/actions'
 
 function StoreCount(props) {
   console.log(props, store, store.getState().count)
