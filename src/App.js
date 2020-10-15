@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 // import logo from './logo.svg';
 import './App.css';
 import Home from './views/home'
+import WrapRouter from './router'
 
 function App () {
   return (
@@ -50,13 +51,12 @@ function Layout () {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/inbox">Inbox</Link></li>
         </ul>
-        <Switch>
-          {/* <Route path="/" component={App}> */}
+        {/* <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/inbox" component={Inbox} />
-          {/* </Route> */}
-        </Switch>
+        </Switch> */}
+        <WrapRouter />
       </Router>
     </div>
   )

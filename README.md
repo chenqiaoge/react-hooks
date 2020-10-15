@@ -91,3 +91,9 @@ cnpm install redux react-redux -S
 cnpm install redux-devtools-extension -D
 # composeWithDevTools()
 ```
+
+- 路由封装，类 vue 写法
+
+- 添加 axios，config，loading
+
+- dnd 拖拽
