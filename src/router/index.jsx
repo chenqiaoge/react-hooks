@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect, useCallback } from 'react'
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
 // import routes from './routeConfig'
 
 // 每个路由都在这里create，可以在钩子中做拦截
@@ -38,19 +38,19 @@ export default function WrapRouter(props) {
   const createdRoute = routeList.map((item, index) => {
     return <Route key={index} {...item} />
   })
-  function changeBread(location) {
+  const changeBread = useCallback(() => {
     // 路由变化，changeBread
     console.log('change store bread')
     // 路由拦截
     if (location.pathname === '/inbox') {
       console.log('拦截了')
-      // history.push('/')
+      history.push('/inbox')
     }
-  }
+  }, [history, location.pathname])
   useEffect(() => {
     console.log('effect route Update', location.pathname)
-    changeBread(location)
-  }, [location.pathname])
+    changeBread()
+  }, [changeBread, location.pathname])
 
   return (
     <Switch>

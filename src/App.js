@@ -1,10 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import {
+  // BrowserRouter as Router, Switch, Route, 
+  Link
+} from 'react-router-dom'
 // import logo from './logo.svg';
 import './App.css';
-import Home from './views/home'
+// import Home from './views/home'
 import WrapRouter from './router'
 import routes from './router/routeConfig' // 全量routes
+import routesApi from './router/routesMock'
 
 function App () {
   return (
@@ -44,36 +48,39 @@ function App () {
 // }
 
 // renderRoute
-function renderRoute () {
-  // 扁平化的routes，遍历生成route
+function calcRouteList () {
   console.log('renderRoute')
-  const routeList = routes
+  const routesIdArr = routesApi.map((item) => item.id)
+  console.log('routesIdArr:', routesIdArr)
+  // 计算权限的routes，遍历生成route，目前适用一级菜单方式
+  return routes.filter(({ id }) => routesIdArr.includes(id))
 
-  // return routeList.map((item, index) => {
-  //   return (
-  //     <WrapRouter key={index} {...item} />
-  //   )
-  // })
-  // 优化route的生成
-  return <WrapRouter routeList={routeList} />
+}
+function renderMenu (menuLists) {
+  return menuLists.map((item, index) => {
+    return (
+      <li key={index}><Link to={item.path} > {item.meta.label}</Link></li>
+    )
+  })
 }
 let trueRoute = null
 function Layout () {
   // console.log('layout update')
   if (!trueRoute) {
-    trueRoute = renderRoute()
+    trueRoute = calcRouteList()
   }
   return (
     <div className="layout">
 
       {/* <Router> */}
       <ul>
-        <li><Link to="/login">login</Link></li>
+        {/* <li><Link to="/login">login</Link></li>
         <li><Link to="/">home</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/inbox">Inbox</Link></li>
+        <li><Link to="/inbox">Inbox</Link></li> */}
+        {renderMenu(trueRoute)}
       </ul>
-      {trueRoute}
+      <WrapRouter routeList={trueRoute} />
       {/* <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />

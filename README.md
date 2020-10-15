@@ -95,9 +95,9 @@ cnpm install redux-devtools-extension -D
 - 路由封装，类 vue 写法
 
   - 路由组件拆分，全量引入组件，可切换，done
-  - 懒加载组件（react-loadable），路由拦截，？
+  - 懒加载组件（react-loadable），路由拦截，done
   - 权限路由，？
-  - 路由搭配面包屑的自动化？
+  - 路由搭配面包屑的自动化？half
 
 - 添加 axios，config，loading
 

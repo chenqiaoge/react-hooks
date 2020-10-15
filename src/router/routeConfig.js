@@ -17,13 +17,35 @@ export default [
   {
     path: '/',
     exact: true,
+    pid: 0,
+    id: 1,
+    meta: {
+      label: 'home'
+    },
     component: Loadable({
       loader: () => import('../views/home'),
       loading: Loading
-    })
+    }),
+    childrens: [
+      {
+        path: '/home/test',
+        meta: {
+          label: 'test'
+        },
+        component: Loadable({
+          loader: () => import('../views/home/list'),
+          loading: Loading
+        })
+      }
+    ]
   },
   {
     path: '/about',
+    pid: 0,
+    id: 2,
+    meta: {
+      label: 'about'
+    },
     component: Loadable({
       loader: () => import('../views/about'),
       loading: Loading
@@ -31,6 +53,11 @@ export default [
   },
   {
     path: '/inbox',
+    pid: 0,
+    id: 3,
+    meta: {
+      label: 'inbox'
+    },
     // component: Inbox,
     // component: () => import('../views/inbox')
     component: Loadable({
