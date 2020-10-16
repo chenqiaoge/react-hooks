@@ -107,6 +107,8 @@ cnpm install redux-devtools-extension -D
 
 - 添加 axios，config，请求统一 loading，antd-UI --?
 
+  > 安装 antd4.7.0 新版本（新版本默认支持按需加载，不用 babel-plugin-import）过程中，遇到 hook 报错，不能使用 antdButton 组件的莫名问题，最后发现是由于项目安装多个版本 reac 导致，卸载 node_modules 目录，重新 npm 安装即可；
+
 - store demo 样例
 
 - dnd 拖拽

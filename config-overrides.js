@@ -1,4 +1,7 @@
-const { override, fixBabelImports, addWebpackExternals, addWebpackAlias,
+const { override,
+  // fixBabelImports, 
+  overrideDevServer,
+  addWebpackExternals, addWebpackAlias,
   // addLessLoader 
 } = require('customize-cra');
 const path = require("path")
@@ -18,11 +21,11 @@ const myPlugin = [
 ]
 
 module.exports = override(
-  fixBabelImports('import', { //配置按需加载
-    libraryName: 'antd',
-    libraryDirectory: 'es',
-    style: true,
-  }),
+  // fixBabelImports('import', { //配置按需加载
+  //   libraryName: 'antd',
+  //   libraryDirectory: 'es',
+  //   style: true,
+  // }),
   addWebpackExternals({ //不做打包处理配置，如直接以cdn引入的
     echarts: "window.echarts",
     // highcharts:"window.highcharts"

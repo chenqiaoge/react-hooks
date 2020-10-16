@@ -4,6 +4,7 @@ import {
   Link
 } from 'react-router-dom'
 // import logo from './logo.svg';
+import { Button, Input } from 'antd'
 import './App.css';
 // import Home from './views/home'
 import WrapRouter from './router'
@@ -27,6 +28,8 @@ function App () {
         >
           Learn React
         </a>
+        <Input placeholder="Basic usage" />
+        <Button>test antd</Button>
       </header>
     </div>
   );
