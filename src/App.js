@@ -29,7 +29,7 @@ function App () {
           Learn React
         </a>
         <Input placeholder="Basic usage" />
-        <Button>test antd</Button>
+        <Button>test antd craco</Button>
       </header>
     </div>
   );

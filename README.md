@@ -99,11 +99,18 @@ cnpm install redux-devtools-extension -D
   - 权限路由，？half
   - 路由搭配面包屑的自动化？half
 
-- 对默认 webpack 自定义配置 -?half
-
+- 对默认 webpack 自定义配置 -?half--old
+  法 1：
   ```sh
   cnpm install customize-cra react-app-rewired -D
   ```
+- 对默认 webpack 自定义配置
+  法 2：
+
+  ```sh
+  cnpm install @craco/craco --save
+  ```
+  - 添加 craco.config.js 进行 webpack 配置
 
 - 添加 axios，config，请求统一 loading，antd-UI --?
 
