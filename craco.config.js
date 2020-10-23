@@ -6,7 +6,9 @@ const pathResolve = pathUrl => path.join(__dirname, pathUrl)
 module.exports = {
   webpack: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': pathResolve('src'),
+      '@store': pathResolve('src/store'),
+      '@utils': pathResolve('src/utils')
     },
     plugins: [],
     configure: (config, { env, paths }) => {
