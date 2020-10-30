@@ -1,3 +1,4 @@
+// 配置文档地址：https://github.com/gsoft-inc/craco/blob/master/packages/craco/README.md#installation
 const { when, whenDev, whenProd, whenTest } = require("@craco/craco");
 const path = require('path')
 
