@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 // import logo from './logo.svg';
 import { Button, Input } from 'antd'
-import './App.css';
+import './App.scss';
 // import Home from './views/home'
 import WrapRouter from './router'
 import routes from './router/routeConfig' // 全量routes
@@ -16,9 +16,9 @@ function App () {
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
+        {/* <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
+        </p> */}
         <Layout />
         <a
           className="App-link"
@@ -89,7 +89,7 @@ function Layout () {
     <div className="layout">
 
       {/* <Router> */}
-      <ul>
+      <ul className="menus">
         {/* <li><Link to="/login">login</Link></li>
         <li><Link to="/">home</Link></li>
         <li><Link to="/about">About</Link></li>

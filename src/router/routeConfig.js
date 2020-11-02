@@ -51,8 +51,20 @@ export default [
         })
       },
       {
-        path: '/home/testAuth',
+        path: '/home/drag',
         id: '1-3',
+        auth: 'true',
+        meta: {
+          label: 'dragDrop',
+        },
+        component: Loadable({
+          loader: () => import('../views/home/dragDrop'),
+          loading: Loading
+        })
+      },
+      {
+        path: '/home/testAuth',
+        id: '1-4',
         auth: 'false',
         meta: {
           label: 'testAuth',
