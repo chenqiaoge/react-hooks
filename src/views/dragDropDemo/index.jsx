@@ -15,7 +15,9 @@ function DragDropComp() {
       <DndProvider backend={HTML5Backend}>
         <div className='test'>
           <div className='dustbin'>
-            <Dustbin />
+            <Dustbin allowedDropEffect='any' />
+            <Dustbin allowedDropEffect='copy' />
+            <Dustbin allowedDropEffect='move' />
           </div>
           <div className='rubish'>
             <Box name='rbs1'>rbs1</Box>

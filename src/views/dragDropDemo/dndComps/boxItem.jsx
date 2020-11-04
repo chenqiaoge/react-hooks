@@ -11,16 +11,31 @@ const style = {
   float: 'left',
 }
 export const Box = ({ name }) => {
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag,previewDrag] = useDrag({
     item: { name, type: ItemTypes.BOX },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
       if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+        console.log('--', dropResult.dropEffect)
+        let alertMessage = ''
+        const isDropAllowed =
+          dropResult.allowedDropEffect === 'any' ||
+          dropResult.allowedDropEffect === dropResult.dropEffect
+        if (isDropAllowed) {
+          const isCopyAction = dropResult.dropEffect === 'copy'
+          const actionName = isCopyAction ? 'copied' : 'moved'
+          alertMessage = `You ${actionName} ${item.name} into ${dropResult.name}!`
+        } else {
+          alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
+        }
+        alert(alertMessage)
       }
     },
-    start: () => {
-      console.log('start')
+    begin: () => {
+      console.log('begin')
+    },
+    canDrag(){
+
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),

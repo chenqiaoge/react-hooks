@@ -13,25 +13,37 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-export const Dustbin = () => {
+function selectBackgroundColor(isActive, canDrop) {
+  if (isActive) {
+    return 'darkgreen'
+  } else if (canDrop) {
+    return 'darkkhaki'
+  } else {
+    return '#222'
+  }
+}
+export const Dustbin = ({ allowedDropEffect }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.BOX,
-    drop: () => ({ name: 'Dustbin' }),
+    drop: () => ({
+      name: `${allowedDropEffect} Dustbin`,
+      allowedDropEffect,
+    }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   })
   const isActive = canDrop && isOver
-  let backgroundColor = '#222'
-  if (isActive) {
-    backgroundColor = 'darkgreen'
-  } else if (canDrop) {
-    backgroundColor = 'darkkhaki'
-  }
+  let backgroundColor = selectBackgroundColor(isActive, canDrop)
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
+      {`Works with ${allowedDropEffect} drop effect`}
+      <br />
+      <br />
       {isActive ? 'Release to drop' : 'Drag a box here'}
+      <br />
+      {canDrop ? 'yep' : 'nop'}
     </div>
   )
 }
