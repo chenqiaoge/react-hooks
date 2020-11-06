@@ -1,17 +1,23 @@
 import React, { useState, useCallback, useEffect } from 'react'
 // import ReactDOM from 'react-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { Button } from 'antd'
 // import update from 'immutability-helper' // 优化复杂state的更新
 import shuffle from 'lodash/shuffle'
 
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+import { ItemTypes } from './dndComps/ItemTypes'
 import { Dustbin } from './dndComps/base/dustbin'
 import { Box } from './dndComps/base/boxItem'
-import { ItemTypes } from './dndComps/ItemTypes'
+import DragAround from './dndComps/dragAround'
+import { NestContainer } from './dndComps/nesting'
 
 function DragDropComp() {
+  // 当前展示dragDemo
+  const [curDemoType, setCurDemoType] = useState('base')
+
   // accepts 定义可以放置的类型，
   const [dustbins, setDustbins] = useState([
     { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
@@ -49,33 +55,48 @@ function DragDropComp() {
     },
     [droppedBoxNames, dustbins]
   )
-  return (
-    <div className='dragWrap'>
-      1112
-      <DndProvider backend={HTML5Backend}>
-        <div className='test'>
-          <div className='dustbin'>
-            {/* <Dustbin allowedDropEffect='any' />
+  const BaseDrag = () => {
+    return (
+      <div className='test'>
+        Dustbin Demos:
+        <div className='dustbin'>
+          {/* <Dustbin allowedDropEffect='any' />
             <Dustbin allowedDropEffect='copy' />
             <Dustbin allowedDropEffect='move' /> */}
-            {dustbins.map(({ accepts, lastDroppedItem }, index) => (
-              <Dustbin
-                key={index}
-                accept={accepts}
-                lastDroppedItem={lastDroppedItem}
-                onDrop={(item) => handleDrop(item, index)}
-              />
-            ))}
-          </div>
-          <div className='rubish'>
-            {/* <Box name='rbs1'>rbs1</Box>
+          {dustbins.map(({ accepts, lastDroppedItem }, index) => (
+            <Dustbin
+              key={index}
+              accept={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={(item) => handleDrop(item, index)}
+            />
+          ))}
+        </div>
+        <div className='rubish'>
+          {/* <Box name='rbs1'>rbs1</Box>
             <Box name='rbs2'>rbs2</Box>
             <Box name='rbs3'>rbs3</Box> */}
-            {boxes.map(({ name, type }, index) => (
-              <Box key={index} name={name} type={type} isDropped={isDropped(name)} />
-            ))}
-          </div>
+          {boxes.map(({ name, type }, index) => (
+            <Box key={index} name={name} type={type} isDropped={isDropped(name)} />
+          ))}
         </div>
+      </div>
+    )
+  }
+  const handleDragType = (type) => {
+    setCurDemoType(type)
+  }
+  return (
+    <div className='dragWrap'>
+      <div className='menuLists'>
+        <Button onClick={() => handleDragType('base')}>base</Button>
+        <Button onClick={() => handleDragType('around')}>around</Button>
+        <Button onClick={() => handleDragType('nest')}>nesting</Button>
+      </div>
+      <DndProvider backend={HTML5Backend}>
+        {curDemoType === 'base' && <BaseDrag />}
+        {curDemoType === 'around' && <DragAround />}
+        {curDemoType === 'nest' && <NestContainer />}
       </DndProvider>
       <div className='test2'>{/* <DragDropComp1 /> */}</div>
     </div>

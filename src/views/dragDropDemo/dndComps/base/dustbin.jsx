@@ -1,7 +1,10 @@
 import React from 'react'
 import { useDrop } from 'react-dnd'
 // import { ItemTypes } from './ItemTypes'
-import { debounce, throttle, customDebounce } from '@/utils'
+import {
+  // debounce, throttle,
+  customDebounce,
+} from '@/utils'
 // import {
 //   // debounce,
 //   // throttle,
