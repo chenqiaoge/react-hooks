@@ -1,6 +1,7 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { useDrag, DragPreviewImage } from 'react-dnd'
 import { ItemTypes } from '../ItemTypes'
+import { boxImage } from './boxImage'
 
 const styles = {
   position: 'absolute',
@@ -10,7 +11,7 @@ const styles = {
   cursor: 'move',
 }
 export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: { id, left, top, type: ItemTypes.BOX }, // 定义item，drop会接收
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -21,8 +22,11 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
   }
 
   return (
-    <div ref={drag} style={{ ...styles, left, top }} className='box'>
-      {children}
-    </div>
+    <>
+      <DragPreviewImage connect={preview} src={boxImage} />
+      <div ref={drag} style={{ ...styles, left, top }} className='box'>
+        {children}
+      </div>
+    </>
   )
 }

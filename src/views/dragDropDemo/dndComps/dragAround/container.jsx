@@ -3,6 +3,7 @@ import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../ItemTypes'
 import { Box } from './Box'
 import update from 'immutability-helper'
+import { BoxWithImage } from './BoxWithPreview'
 
 const styles = {
   width: 500,
@@ -46,6 +47,7 @@ export default function Container({ hideSourceOnDrag }) {
 
   return (
     <div ref={drop} style={styles}>
+      {/* <BoxWithImage /> */}
       {Object.keys(boxes).map((key) => {
         const { left, top, title } = boxes[key]
         return (
