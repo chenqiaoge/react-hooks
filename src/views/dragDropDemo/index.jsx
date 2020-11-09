@@ -13,6 +13,7 @@ import { Dustbin } from './dndComps/base/dustbin'
 import { Box } from './dndComps/base/boxItem'
 import DragAround from './dndComps/dragAround'
 import { NestContainer } from './dndComps/nesting'
+import Sortable from './dndComps/sortable'
 
 function DragDropComp() {
   // 当前展示dragDemo
@@ -92,11 +93,13 @@ function DragDropComp() {
         <Button onClick={() => handleDragType('base')}>base</Button>
         <Button onClick={() => handleDragType('around')}>around</Button>
         <Button onClick={() => handleDragType('nest')}>nesting</Button>
+        <Button onClick={() => handleDragType('sortable')}>sortable</Button>
       </div>
       <DndProvider backend={HTML5Backend}>
         {curDemoType === 'base' && <BaseDrag />}
         {curDemoType === 'around' && <DragAround />}
         {curDemoType === 'nest' && <NestContainer />}
+        {curDemoType === 'sortable' && <Sortable />}
       </DndProvider>
       <div className='test2'>{/* <DragDropComp1 /> */}</div>
     </div>
