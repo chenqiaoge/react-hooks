@@ -3,47 +3,62 @@ import { useDrop } from 'react-dnd'
 import { Colors } from './Colors'
 const style = {
   border: '1px solid gray',
-  height: '25rem',
-  width: '25rem',
+  minHeight: '15rem',
+  minWidth: '15rem',
   padding: '2rem',
   textAlign: 'center',
 }
-const TargetBox = ({ onDrop, lastDroppedColor }) => {
-  const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
+const TargetBox = ({ onDrop, lastDroppedColor, children }) => {
+  const [hasDropped, setHasDropped] = useState(false)
+  const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
+  const [{ isOver, isOverCurrent, draggingColor, canDrop }, drop] = useDrop({
     accept: [Colors.YELLOW, Colors.BLUE],
-    drop(item) {
+    drop(item, monitor) {
+      const didDrop = monitor.didDrop()
+      if (didDrop) {
+        console.log('didDrop')
+        return
+      }
       onDrop(item.type)
-      return undefined
+      setHasDropped(true)
+      // return undefined
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
+      isOverCurrent: monitor.isOver({ shallow: true }),
+      // canDrop: monitor.canDrop(),
       draggingColor: monitor.getItemType(),
     }),
   })
-  const opacity = isOver ? 1 : 0.7
+  const opacity = isOver ? 1 : 0.5
+  console.log(isOver, isOverCurrent)
   let backgroundColor = ''
-  switch (draggingColor) {
-    case Colors.BLUE:
-      backgroundColor = 'lightblue'
-      break
-    case Colors.YELLOW:
-      backgroundColor = 'lightgoldenrodyellow'
-      break
-    default:
-      break
-  }
+  // switch (draggingColor) {
+  //   case Colors.BLUE:
+  //     backgroundColor = 'lightblue'
+  //     break
+  //   case Colors.YELLOW:
+  //     backgroundColor = 'lightgoldenrodyellow'
+  //     break
+  //   default:
+  //     break
+  // }
+  backgroundColor = isOverCurrent ? 'red' : ''
   return (
     <div ref={drop} style={{ ...style, backgroundColor, opacity }}>
-      <p>Drop here.</p>
-
-      {!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
+      <p>Drop here.{isOverCurrent ? 'cur' : ''}</p>
+      {lastDroppedColor && hasDropped && <p>Last dropped: {lastDroppedColor}</p>}
+      {children}
     </div>
   )
 }
-const StatefulTargetBox = (props) => {
+const StatefulTargetBox = ({ children, ...props }) => {
   const [lastDroppedColor, setLastDroppedColor] = useState(null)
   const handleDrop = useCallback((color) => setLastDroppedColor(color), [])
-  return <TargetBox {...props} lastDroppedColor={lastDroppedColor} onDrop={handleDrop} />
+  return (
+    <TargetBox {...props} lastDroppedColor={lastDroppedColor} onDrop={handleDrop}>
+      {children}
+    </TargetBox>
+  )
 }
 export default StatefulTargetBox

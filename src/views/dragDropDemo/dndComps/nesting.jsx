@@ -20,7 +20,11 @@ export const NestContainer = memo(function Container() {
           </SourceBox>
         </div>
         <div style={{ float: 'right', marginLeft: '5rem', marginTop: '.5rem' }}>
-          <TargetBox></TargetBox>
+          <TargetBox>
+            <TargetBox color={'#666'}>
+              <TargetBox></TargetBox>
+            </TargetBox>
+          </TargetBox>
         </div>
       </div>
     </>
