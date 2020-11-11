@@ -38,6 +38,18 @@ const Container = () => {
       id: 7,
       text: 'PROFIT',
     },
+    {
+      id: 8,
+      text: 'PROFIT8',
+    },
+    {
+      id: 9,
+      text: 'PROFIT9',
+    },
+    {
+      id: 10,
+      text: 'PROFIT10',
+    },
   ])
 
   // const moveCard = useCallback(

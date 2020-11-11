@@ -14,6 +14,7 @@ import { Box } from './dndComps/base/boxItem'
 import DragAround from './dndComps/dragAround'
 import { NestContainer } from './dndComps/nesting'
 import Sortable from './dndComps/sortable'
+import BeauifulDnd from './beautiful'
 
 function DragDropComp() {
   // 当前展示dragDemo
@@ -34,12 +35,13 @@ function DragDropComp() {
   const [droppedBoxNames, setDroppedBoxNames] = useState([])
   // 定时模拟修改数据
   useEffect(() => {
-    setTimeout(() => {
-      setBoxes(shuffle(boxes))
-      setDustbins(shuffle(dustbins))
-      console.log('change data')
-    }, 2000)
+    // setTimeout(() => {
+    //   setBoxes(shuffle(boxes))
+    //   setDustbins(shuffle(dustbins))
+    //   console.log('change data')
+    // }, 2000)
     // return () => clearInterval(interval)
+    console.log('didMount')
   }, [])
   // 是否已放置过
   function isDropped(boxName) {
@@ -94,12 +96,14 @@ function DragDropComp() {
         <Button onClick={() => handleDragType('around')}>around</Button>
         <Button onClick={() => handleDragType('nest')}>nesting</Button>
         <Button onClick={() => handleDragType('sortable')}>sortable</Button>
+        <Button onClick={() => handleDragType('beautiful')}>beautiful</Button>
       </div>
       <DndProvider backend={HTML5Backend}>
         {curDemoType === 'base' && <BaseDrag />}
         {curDemoType === 'around' && <DragAround />}
         {curDemoType === 'nest' && <NestContainer />}
         {curDemoType === 'sortable' && <Sortable />}
+        {curDemoType === 'beautiful' && <BeauifulDnd />}
       </DndProvider>
       <div className='test2'>{/* <DragDropComp1 /> */}</div>
     </div>
