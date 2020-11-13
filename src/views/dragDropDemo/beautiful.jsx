@@ -48,6 +48,7 @@ export default class BeauifulDnd extends Component {
     super(props)
     this.state = {
       items: getItems(10),
+      items1: getItems(5),
     }
     this.onDragEnd = this.onDragEnd.bind(this)
   }
@@ -119,6 +120,7 @@ export default class BeauifulDnd extends Component {
             </div>
           )}
         </Droppable>
+        {/* test two droppable */}
       </DragDropContext>
     )
   }
