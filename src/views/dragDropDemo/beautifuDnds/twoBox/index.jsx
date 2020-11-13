@@ -110,7 +110,11 @@ function DragTwoBox(props) {
   const renderItems = useCallback(
     (itemList) =>
       itemList.map((item, index) => (
-        <Draggable key={item.id} draggableId={item.id} index={index}>
+        <Draggable
+          key={item.id}
+          draggableId={item.id}
+          isDragDisabled={item.id === 'item-11'}
+          index={index}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
