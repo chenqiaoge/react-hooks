@@ -103,6 +103,8 @@ function DragTwoBox(props) {
     console.log('onDragUpdate:', prop)
     if (prop.source.droppableId === 'selected') {
       setDropOneDisable(true)
+    } else {
+      setDropOneDisable(false)
     }
   }
   const renderItems = useCallback(
