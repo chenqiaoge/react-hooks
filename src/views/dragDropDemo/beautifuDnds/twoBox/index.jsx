@@ -96,6 +96,15 @@ function DragTwoBox(props) {
     },
     [items, selected, move]
   )
+  const onBeforeCapture = (prop) => {
+    console.log('beforeCapture:', prop)
+  }
+  const onDragUpdate = (prop) => {
+    console.log('onDragUpdate:', prop)
+    if (prop.source.droppableId === 'selected') {
+      setDropOneDisable(true)
+    }
+  }
   const renderItems = useCallback(
     (itemList) =>
       itemList.map((item, index) => (
@@ -116,7 +125,10 @@ function DragTwoBox(props) {
   return (
     <div className='beautifulDndDemo'>
       <h3>beautiful-dnd</h3>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext
+        onDragEnd={onDragEnd}
+        onDragUpdate={onDragUpdate}
+        onBeforeCapture={onBeforeCapture}>
         <Droppable droppableId='items' isDropDisabled={dropOneDisable}>
           {(provided, snapshot) => (
             <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
