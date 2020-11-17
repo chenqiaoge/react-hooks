@@ -16,6 +16,7 @@ import { NestContainer } from './dndComps/nesting'
 import Sortable from './dndComps/sortable'
 import BeauifulDnd from './beautiful'
 import BeautiTwoDrag from './beautifuDnds/twoBox'
+import BeautiDynamicDrag from './beautifuDnds/twoBox/dynamicDemo'
 
 function DragDropComp() {
   // 当前展示dragDemo
@@ -99,6 +100,7 @@ function DragDropComp() {
         <Button onClick={() => handleDragType('sortable')}>sortable</Button>
         <Button onClick={() => handleDragType('beautiful')}>beautiful</Button>
         <Button onClick={() => handleDragType('beautiful-t')}>DragTwoBox</Button>
+        <Button onClick={() => handleDragType('beautiful-dyna')}>beautiful-dyna</Button>
       </div>
       <DndProvider backend={HTML5Backend}>
         {curDemoType === 'base' && <BaseDrag />}
@@ -107,6 +109,7 @@ function DragDropComp() {
         {curDemoType === 'sortable' && <Sortable />}
         {curDemoType === 'beautiful' && <BeauifulDnd />}
         {curDemoType === 'beautiful-t' && <BeautiTwoDrag />}
+        {curDemoType === 'beautiful-dyna' && <BeautiDynamicDrag />}
       </DndProvider>
       <div className='test2'>{/* <DragDropComp1 /> */}</div>
     </div>

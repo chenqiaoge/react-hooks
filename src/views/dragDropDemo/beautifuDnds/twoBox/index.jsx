@@ -46,6 +46,7 @@ function DragTwoBox(props) {
   const [items, setItems] = useState(getItems(10))
   const [selected, setSelected] = useState(getItems(3, 10))
   const [dropOneDisable, setDropOneDisable] = useState(false)
+  console.log('dropOneDisable', dropOneDisable)
   const move = useCallback((sourceData, targetData, source, destination) => {
     const sourceClone = Array.from(sourceData)
     const targetClone = Array.from(targetData)

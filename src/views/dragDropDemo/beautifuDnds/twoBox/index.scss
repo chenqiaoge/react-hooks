@@ -6,3 +6,10 @@
     margin-left: 20px;
   }
 }
+
+.dynamic {
+  .dragItem {
+    display: flex;
+    justify-content: space-around;
+  }
+}
