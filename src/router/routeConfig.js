@@ -39,14 +39,38 @@ export default [
         })
       },
       {
-        path: '/home/test',
+        path: '/home/antVDemo',
         id: '1-2',
-        auth: 'false',
+        auth: 'true',
         meta: {
-          label: 'test1',
+          label: 'antVDemo',
         },
         component: Loadable({
-          loader: () => import('../views/home/list'),
+          loader: () => import('../views/home/antV'),
+          loading: Loading
+        })
+      },
+      {
+        path: '/home/drag',
+        id: '1-3',
+        auth: 'true',
+        meta: {
+          label: 'dragDrop',
+        },
+        component: Loadable({
+          loader: () => import('../views/home/dragDrop'),
+          loading: Loading
+        })
+      },
+      {
+        path: '/home/testAuth',
+        id: '1-4',
+        auth: 'false',
+        meta: {
+          label: 'testAuth',
+        },
+        component: Loadable({
+          loader: () => import('../views/home/antV'),
           loading: Loading
         })
       }
