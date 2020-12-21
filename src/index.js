@@ -8,11 +8,11 @@ import Root from './root';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <Root />
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

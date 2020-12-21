@@ -1,17 +1,7 @@
 // import Home from '../views/home'
 // import About from '../views/about'
 // import Inbox from '../views/inbox'
-import React from 'react'
-import Loadable from 'react-loadable'
-// 该写法，默认不能使用懒加载（import()方式）组件，
-// react 懒加载可以使用npm包（react-loadable）
-function Loading () {
-  return (
-    <div className="Loading">
-      loading...
-    </div>
-  )
-}
+import { lazy } from 'react'  // 路由组件懒加载 v16.6.0+
 
 export default [
   {
@@ -22,10 +12,7 @@ export default [
     meta: {
       label: 'home'
     },
-    component: Loadable({
-      loader: () => import('../views/home'),
-      loading: Loading
-    }),
+    component: lazy(() => import('../views/home')),
     childrens: [
       {
         path: '/home/test',
@@ -33,10 +20,7 @@ export default [
         meta: {
           label: 'test'
         },
-        component: Loadable({
-          loader: () => import('../views/home/list'),
-          loading: Loading
-        })
+        component: lazy(() => import('../views/home/list'))
       },
       {
         path: '/home/antVDemo',
@@ -45,10 +29,7 @@ export default [
         meta: {
           label: 'antVDemo',
         },
-        component: Loadable({
-          loader: () => import('../views/home/antV'),
-          loading: Loading
-        })
+        component: lazy(() => import('../views/home/dragDrop'))
       },
       {
         path: '/home/drag',
@@ -57,10 +38,7 @@ export default [
         meta: {
           label: 'dragDrop',
         },
-        component: Loadable({
-          loader: () => import('../views/home/dragDrop'),
-          loading: Loading
-        })
+        component: lazy(() => import('../views/home/dragDrop'))
       },
       {
         path: '/home/testAuth',
@@ -68,11 +46,9 @@ export default [
         auth: 'false',
         meta: {
           label: 'testAuth',
+          showMenu: false
         },
-        component: Loadable({
-          loader: () => import('../views/home/antV'),
-          loading: Loading
-        })
+        component: lazy(() => import('../views/home/dragDrop'))
       }
     ]
   },
@@ -83,10 +59,7 @@ export default [
     meta: {
       label: 'about'
     },
-    component: Loadable({
-      loader: () => import('../views/about'),
-      loading: Loading
-    })
+    component: lazy(() => import('../views/about'))
   },
   {
     path: '/inbox',
@@ -95,11 +68,6 @@ export default [
     meta: {
       label: 'inbox'
     },
-    // component: Inbox,
-    // component: () => import('../views/inbox')
-    component: Loadable({
-      loader: () => import('../views/inbox'),
-      loading: Loading
-    })
+    component: lazy(() => import('../views/inbox'))
   }
 ]

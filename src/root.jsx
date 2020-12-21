@@ -25,6 +25,5 @@ function PrivateRoute(props) {
   )
 }
 
-console.log(Root)
 
 export default Root

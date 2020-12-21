@@ -11,7 +11,6 @@ export default [
   // },
   {
     path: '/inbox',
-    id: 3
-    // component: () => import('../views/inbox')
+    id: 3,
   }
 ]

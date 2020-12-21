@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { Suspense, useEffect, useCallback } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
 // import routes from './routeConfig'
 
@@ -27,12 +27,7 @@ export default function WrapRouter(props) {
 
   return (
     <Switch>
-      {createdRoute}
-      {/* <Route path="/" component={App}> */}
-      {/* <Route path='/' exact component={Home} /> */}
-      {/* <Route path='/about' component={About} /> */}
-      {/* <Route path='/inbox' component={Inbox} /> */}
-      {/* </Route> */}
+      <Suspense fallback={<div>Loading...</div>}>{createdRoute}</Suspense>
     </Switch>
   )
 }
