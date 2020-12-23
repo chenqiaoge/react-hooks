@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import Login from './views/login'
-import App from './App'
+import Login from '@/views/login'
+import App from '@/components/common/layout'
 
 function Root(props) {
   return (
@@ -24,6 +24,5 @@ function PrivateRoute(props) {
     />
   )
 }
-
 
 export default Root

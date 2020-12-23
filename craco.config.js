@@ -3,7 +3,7 @@
 const path = require('path')
 
 const pathResolve = pathUrl => path.join(__dirname, pathUrl)
-// const sassResourcesLoader = require('craco-sass-resources-loader')
+const sassResourcesLoader = require('craco-sass-resources-loader')
 
 module.exports = {
   style: {
@@ -25,17 +25,17 @@ module.exports = {
       return config
     }
   },
-  // plugins: [
-  //   {
-  //     plugin: sassResourcesLoader,
-  //     options: {
-  //       resources: [
-  //         './src/assets/layout.scss',
-  //         // './src/my-other-config-theme.scss'
-  //       ],
-  //     },
-  //   },
-  // ],
+  plugins: [
+    {
+      plugin: sassResourcesLoader,
+      options: {
+        resources: [
+          './src/assets/layout.scss',
+          // './src/my-other-config-theme.scss'
+        ],
+      },
+    },
+  ],
 }
 
 // https://blog.csdn.net/sinat_36728518/article/details/106230874

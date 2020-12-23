@@ -9,14 +9,27 @@ export default [
     exact: true,
     pid: 0,
     id: 1,
+    auth: false,
     meta: {
-      label: 'home'
+      label: 'homes'
     },
-    component: lazy(() => import('../views/home')),
+    // component: lazy(() => import('../views/home')),
     childrens: [
+      {
+        path: '/home',
+        exact: true,
+        pid: 1,
+        id: '1-0',
+        auth: false,
+        meta: {
+          label: 'home'
+        },
+        component: lazy(() => import('../views/home')),
+      },
       {
         path: '/home/test',
         id: '1-1',
+        auth: false,
         meta: {
           label: 'test'
         },
@@ -25,7 +38,7 @@ export default [
       {
         path: '/home/antVDemo',
         id: '1-2',
-        auth: 'true',
+        auth: false,
         meta: {
           label: 'antVDemo',
         },
@@ -34,7 +47,7 @@ export default [
       {
         path: '/home/drag',
         id: '1-3',
-        auth: 'true',
+        auth: false,
         meta: {
           label: 'dragDrop',
         },
@@ -43,7 +56,7 @@ export default [
       {
         path: '/home/testAuth',
         id: '1-4',
-        auth: 'false',
+        auth: false,
         meta: {
           label: 'testAuth',
           showMenu: false
@@ -56,6 +69,7 @@ export default [
     path: '/about',
     pid: 0,
     id: 2,
+    auth: false,
     meta: {
       label: 'about'
     },
@@ -65,6 +79,7 @@ export default [
     path: '/inbox',
     pid: 0,
     id: 3,
+    auth: false,
     meta: {
       label: 'inbox'
     },

@@ -4,43 +4,30 @@ import {
   Link
 } from 'react-router-dom'
 // import logo from './logo.svg';
-import { Button, Input } from 'antd'
+import { Button, Input, Layout } from 'antd'
 import './App.scss';
 // import Home from './views/home'
+import LayoutComponent from '@/components/common/layout'
+
 import WrapRouter from './router'
 import routes from './router/routeConfig' // 全量routes
 import routesApi from './router/routesMock'
 
+// 待做：layout转到app中！
+let trueRoute = null
 function App () {
+  if (!trueRoute) {
+    trueRoute = calcRouteList()
+  }
   return (
-    <div id="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        {/* <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p> */}
-        <Layout />
-        <Input placeholder="Basic usage" />
-        <Button>test antd craco</Button>
-      </header>
+    <div className="App">
+      <LayoutComponent routes={trueRoute}>
+      </LayoutComponent>
+      {/* <Input placeholder="Basic usage" /> */}
+      {/* <Button>test antd craco</Button> */}
     </div>
   );
 }
-
-// function About () {
-//   return (
-//     <div className="About">
-//       about
-//     </div>
-//   )
-// }
-// function Inbox () {
-//   return (
-//     <div className="Inbox">
-//       Inbox
-//     </div>
-//   )
-// }
 
 // renderRoute
 function calcRouteList () {
@@ -71,32 +58,32 @@ function renderMenu (menuLists) {
     )
   })
 }
-let trueRoute = null
-function Layout () {
+function LayoutCom () {
+  const { Header, Footer, Sider, Content } = Layout;
   // console.log('layout update')
   if (!trueRoute) {
     trueRoute = calcRouteList()
   }
   return (
-    <div className="layout">
-
-      {/* <Router> */}
-      <ul className="menus">
-        {/* <li><Link to="/login">login</Link></li>
-        <li><Link to="/">home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/inbox">Inbox</Link></li> */}
-        {renderMenu(trueRoute)}
-      </ul>
-      <WrapRouter routeList={trueRoute} />
-      {/* <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/inbox" component={Inbox} />
-        </Switch> */}
-      {/* <WrapRouter /> */}
-      {/* </Router> */}
-    </div>
+    <Layout className="layout">
+      <Sider collapsible style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+      }}>Sider
+        <ul className="menus">
+          {renderMenu(trueRoute)}
+        </ul>
+      </Sider>
+      <Layout style={{ marginLeft: 200 }}>
+        <Header>Header</Header>
+        <Content>Content
+          <WrapRouter routeList={trueRoute} />
+        </Content>
+        <Footer>Footer</Footer>
+      </Layout>
+    </Layout>
   )
 }
 
