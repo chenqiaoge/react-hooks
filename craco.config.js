@@ -4,6 +4,7 @@ const path = require('path')
 
 const pathResolve = pathUrl => path.join(__dirname, pathUrl)
 const sassResourcesLoader = require('craco-sass-resources-loader')
+const CracoLessPlugin = require('craco-less');
 
 module.exports = {
   style: {
@@ -26,13 +27,24 @@ module.exports = {
     }
   },
   plugins: [
+    // {
+    //   plugin: sassResourcesLoader,
+    //   options: {
+    //     resources: [
+    //       './src/assets/layout.scss',
+    //       // './src/my-other-config-theme.scss'
+    //     ],
+    //   },
+    // }, 
     {
-      plugin: sassResourcesLoader,
+      plugin: CracoLessPlugin,
       options: {
-        resources: [
-          './src/assets/layout.scss',
-          // './src/my-other-config-theme.scss'
-        ],
+        lessLoaderOptions: {
+          lessOptions: {
+            modifyVars: {},
+            javascriptEnabled: true,
+          },
+        },
       },
     },
   ],

@@ -5,20 +5,50 @@ import { lazy } from 'react'  // 路由组件懒加载 v16.6.0+
 
 export default [
   {
-    path: '/',
-    exact: true,
+    path: '/manage',
     pid: 0,
     id: 1,
     auth: false,
     meta: {
-      label: 'homes'
+      label: '问卷管理'
+    },
+    component: lazy(() => import('../views/home'))
+  },
+  {
+    path: '/analyze',
+    pid: 0,
+    id: 2,
+    auth: false,
+    meta: {
+      label: '统计分析'
+    },
+    component: lazy(() => import('../views/hookStore'))
+  },
+  {
+    path: '/about',
+    pid: 0,
+    id: 3,
+    auth: false,
+    meta: {
+      label: '基础数据维护'
+    },
+    component: lazy(() => import('../views/about'))
+  },
+  {
+    path: '/',
+    exact: true,
+    pid: 0,
+    id: 4,
+    auth: false,
+    meta: {
+      label: '权限设置'
     },
     // component: lazy(() => import('../views/home')),
     childrens: [
       {
         path: '/home',
         exact: true,
-        pid: 1,
+        pid: 4,
         id: '1-0',
         auth: false,
         meta: {
@@ -66,19 +96,9 @@ export default [
     ]
   },
   {
-    path: '/about',
-    pid: 0,
-    id: 2,
-    auth: false,
-    meta: {
-      label: 'about'
-    },
-    component: lazy(() => import('../views/about'))
-  },
-  {
     path: '/inbox',
     pid: 0,
-    id: 3,
+    id: 5,
     auth: false,
     meta: {
       label: 'inbox'

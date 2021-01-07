@@ -34,7 +34,7 @@ function renderMenu(menuLists) {
 function SideBar({ routes }) {
   console.log(routes)
   return (
-    <Menu className='customMenu' theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+    <Menu className='customMenu' theme='light' defaultSelectedKeys={['1']} mode='inline'>
       {renderMenu(routes)}
       {/* <Menu.Item key='1' icon={<PieChartOutlined />}>
         Option 1

@@ -1,4 +1,5 @@
 import { globalConfig } from '@/config'
+import { message } from 'antd'
 /**
  * 根据页面url，返回当前运行的环境是：test || uat || pre || prod
  * @returns {string}
@@ -17,6 +18,28 @@ export const getCurrentEnv = function () {
     return 'prod'
   }
 }
+
+/**
+ * 消息节流，代理message对象
+ */
+export const messageTip = new Proxy(function () { }, {
+  get (target, property, receiver) {
+    let _this = this;
+    return function (msg) {
+      _this.apply(target, _this, [msg, property]);
+    };
+  },
+  apply (target, thisBing, [msg, status]) {
+    sessionStorage["flag"] = sessionStorage["flag"] || "true";
+    if (sessionStorage["flag"] === "false") return;
+    sessionStorage["flag"] = "false";
+    message[status || "success"](msg);
+    setTimeout(_ => {
+      sessionStorage["flag"] = "true";
+      delete sessionStorage["flag"];
+    }, 1500);
+  }
+});
 
 /**
  * 防抖函数--？？？
@@ -66,4 +89,15 @@ export function throttle (fn, delay) {
       valid = true;
     }, delay)
   }
+}
+
+export function flatChildren (target = [], origin) {
+  origin.forEach((item) => {
+    // console.log(item)
+    const { children, ...self } = item
+    target.push(self)
+    if (children?.length > 0) {
+      flatChildren(target, children)
+    }
+  })
 }

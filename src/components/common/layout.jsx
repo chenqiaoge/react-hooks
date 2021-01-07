@@ -5,19 +5,23 @@ import WrapRouter from '@/router'
 
 import routes from '@/router/routeConfig' // 全量routes
 import routesApi from '@/router/routesMock'
+import _ from 'lodash'
+import { flatChildren } from '@/utils'
 import '@/App.scss'
 
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Sider } = Layout
 
 // calc trueRoutes
 function calcRouteList() {
   console.log('renderRoute')
-  // 扁平化apiId
-  const routesIdArr = routesApi.map((item) => item.id)
-  console.log('routesIdArr:', routesIdArr)
+  const authRoutes = []
+  // 扁平化authRoutes
+  flatChildren(authRoutes, routesApi)
+
+  console.log('authRoutes:', authRoutes)
   // 计算权限的routes，遍历生成route，
   // 路由扁平化处理
-  let trueMenus = routes
+  let trueMenus = _.cloneDeep(routes)
   const flatRoutes = []
   matchRoutes(trueMenus)
 
@@ -25,16 +29,17 @@ function calcRouteList() {
     routesStore.forEach((routeItem) => {
       const { childrens = [], ...self } = routeItem
       // const childArr = []
-      if (routesIdArr.some((id) => routeItem.id === id)) {
-        console.log('self:', self)
+      if (authRoutes.some((authItem) => routeItem.id === authItem.id)) {
+        // console.log('self:', self)
         flatRoutes.push(self)
-        routeItem.auth = true
+        routeItem.auth = true // 有权限的菜单
       }
       if (childrens.length > 0) {
         matchRoutes(childrens)
       }
     })
   }
+  // 扁平化的route，结构化的menu
   return {
     flatRoutes,
     trueMenus,
@@ -60,17 +65,23 @@ function LayoutComponent(props) {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider className='siderMenus' collapsible collapsed={collapsed} onCollapse={onCollapse}>
+      <Sider
+        theme='light'
+        className='siderMenus'
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}>
         {/* <div className='logo' /> */}
         <SideBar routes={trueMenus} />
       </Sider>
       <Layout className='site-layout'>
-        <Header className='site-layout-background' style={{ padding: 0 }} />
-        <Content style={{ margin: '0 16px' }}>
+        <Header theme='light' className='site-layout-background' style={{ padding: 0 }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
+        </Header>
+        <Content style={{ margin: '0 16px' }}>
           <div className='site-layout-background' style={{ padding: 24, minHeight: 360 }}>
             <div>content</div>
             <WrapRouter name='content' routeList={trueRoute} />

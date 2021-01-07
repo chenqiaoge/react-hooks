@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'antd'
 import store from '@/store' // store直接引用
 
 import StoreCount from './hookStore'
@@ -20,7 +21,9 @@ function Home(props) {
       Home
       <HomeClass />
       <div className='cont'>count:{props.count}</div>
-      <button onClick={addCount}>add</button>
+      <Button type='primary' onClick={addCount}>
+        add
+      </Button>
       <StoreCount />
     </div>
   )
