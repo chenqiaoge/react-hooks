@@ -3,7 +3,6 @@
 const path = require('path')
 
 const pathResolve = pathUrl => path.join(__dirname, pathUrl)
-const sassResourcesLoader = require('craco-sass-resources-loader')
 const CracoLessPlugin = require('craco-less');
 
 module.exports = {
@@ -27,15 +26,6 @@ module.exports = {
     }
   },
   plugins: [
-    // {
-    //   plugin: sassResourcesLoader,
-    //   options: {
-    //     resources: [
-    //       './src/assets/layout.scss',
-    //       // './src/my-other-config-theme.scss'
-    //     ],
-    //   },
-    // }, 
     {
       plugin: CracoLessPlugin,
       options: {
