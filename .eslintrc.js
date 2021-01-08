@@ -1,12 +1,3 @@
-// module.exports = {
-//   extends: ["react-app"],
-//   rules: {
-//     // "no-unused-vars": 1,
-//     "react-hooks/exhaustive-deps": 1,
-//     "import/no-anonymous-default-export": 'off'
-//   }
-// }
-
 module.exports = {
   // "env": {
   //   "browser": true,
