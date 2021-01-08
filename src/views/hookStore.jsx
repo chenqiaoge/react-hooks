@@ -2,14 +2,14 @@ import React, { useState, useCallback } from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import store from '@/store' // store直接引用
-import { handleAddCount } from '@/store/actions'
+import { handleAddCount } from '@/store/actions/demo'
 
 function StoreCount(props) {
   console.log(props, store, store.getState().count)
   // console.log(props)
   const [pageState] = useState(1)
   // 获取store中state
-  const hookCount = useSelector((state) => state.count, shallowEqual)
+  const hookCount = useSelector((state) => state.demo.count, shallowEqual)
   // store 的 dispatch
   const dispatch = useDispatch()
   const history = useHistory()

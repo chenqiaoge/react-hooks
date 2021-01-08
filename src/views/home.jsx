@@ -6,7 +6,7 @@ import store from '@/store' // store直接引用
 import StoreCount from './hookStore'
 import HomeClass from './home/homeClass.jsx'
 
-import { handleAddCount } from '@store/actions'
+import { handleAddCount } from '@store/actions/demo'
 
 function Home(props) {
   console.log(props, store, store.getState().count)
@@ -28,7 +28,7 @@ function Home(props) {
     </div>
   )
 }
-const mapStateToProps = (state) => ({ count: state.count })
+const mapStateToProps = (state) => ({ count: state.demo.count })
 const mapDispatchToProps = (dispatch) => {
   return {
     handleAddCount: (val) => dispatch(handleAddCount(val)),

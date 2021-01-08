@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale-provider/zh_CN'
-import store from '@store'
-import './index.scss';
+import store, { persistor } from '@store'
+import { PersistGate } from 'redux-persist/integration/react'
+
 import '@/assets/style/theme.less'
-// import App from './App';
 import Root from './root';
 import * as serviceWorker from './serviceWorker';
 import { messageTip } from '@utils/index.js'
@@ -18,7 +18,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>
-        <Root />
+        <PersistGate loading={null} persistor={persistor}>
+          <Root />
+        </PersistGate>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>,

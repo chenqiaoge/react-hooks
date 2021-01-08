@@ -17,7 +17,7 @@ export default function WrapRouter(props) {
     }
     if (location.pathname === item.path) {
       return (
-        <WhiteSpace>
+        <WhiteSpace key={index}>
           <Route key={index} {...item} />
         </WhiteSpace>
       )

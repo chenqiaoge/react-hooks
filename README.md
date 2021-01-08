@@ -84,6 +84,166 @@ npm start
 # react-router 是基础库，react-router-dom是搭配react在web端的库
 cnpm install react-router-dom -S
 cnpm install redux react-redux -S
+# redux 持久化
+cnpm install redux-persist -S
+
+```
+
+```js
+// ----reducers/index.js--------
+import { combineReducers } from 'redux'
+// import { persistReducer } from 'redux-persist'
+// import storage from 'redux-persist/lib/storage'
+
+import loading from './loading'
+import demo from './demo'
+
+const rootReducer = combineReducers({
+  demo,
+  loading,
+})
+export default rootReducer
+// ---reducers/demo.js
+import * as types from '@/store/action-types'
+const initialState = {
+  count: 10,
+}
+// state仓库的值, action是传递的状态
+export default function (state = initialState, action) {
+  console.log('---reducer:', action, state)
+  // if (action.type === 'persist/REHYDRATE') return state
+  switch (action.type) {
+    case types.ADD_COUNT: {
+      return {
+        ...state,
+        count: action.payload.count,
+      }
+    }
+
+    default: {
+      return state
+    }
+  }
+}
+// --actions/demo.js
+import * as types from '@/store/action-types'
+
+let nextTodoId = 1
+export const handleAddCount = (content) => {
+  console.log(content)
+  return {
+    type: types.ADD_COUNT,
+    payload: {
+      id: ++nextTodoId,
+      count: content,
+    },
+  }
+}
+// store/index.js
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import rootReducer from './reducers/index' // reducer模块化组合
+
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['loading', 'demo'], // 需要持久化的reducer
+}
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer)
+
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)))
+export let persistor = persistStore(store)
+export default store
+
+// 入口文件index.js：（PersistGate,persistor）
+import store, { persistor } from '@store'
+import { PersistGate } from 'redux-persist/integration/react'
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <ConfigProvider locale={zhCN}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Root />
+        </PersistGate>
+      </ConfigProvider>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+```
+
+- 组件中使用 store：三种方式
+
+1. 直接引入 store：
+
+```js
+import store from '@/store'；
+console.log(store, store.getState(),store.dispatch())
+```
+
+2. connect 方式：
+
+```js
+function Home(props) {
+  console.log(props.count)
+  props.handleAddCount(num)
+}
+const mapStateToProps = (state) => ({ count: state.demo.count })
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleAddCount: (val) => dispatch(handleAddCount(val)),
+  }
+}
+//  法二：connect 方式使用store
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
+```
+
+3. hook 的 use 方法
+
+```js
+import React, { useState, useCallback } from 'react'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+import { handleAddCount } from '@/store/actions/demo'
+
+function StoreCount(props) {
+  // console.log(props)
+  const [pageState] = useState(1)
+  // 获取store中state
+  const hookCount = useSelector((state) => state.demo.count, shallowEqual)
+  // console.log('hookState', hookCount)
+  // store 的 dispatch
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const addCount = useCallback(() => {
+    const num = hookCount + 1
+    // console.log(num, props)
+    dispatch(handleAddCount(num))
+  }, [dispatch, hookCount])
+  const handleGoLogin = useCallback(() => {
+    history.push('/login')
+  }, [history])
+  return (
+    <div className='Home'>
+      <div className='cont'>
+        pageState:{pageState},hookcount:{hookCount}
+      </div>
+      <span className='testJsx'>文件名jsx有提示</span>
+      <button onClick={addCount}>add</button>
+      <button onClick={handleGoLogin}>login</button>
+    </div>
+  )
+}
+
+// 法三：hooks 方式使用store
+export default StoreCount
 ```
 
 ```sh
@@ -110,6 +270,7 @@ cnpm install redux-devtools-extension -D
   ```sh
   cnpm install @craco/craco --save
   ```
+
   - 添加 craco.config.js 进行 webpack 配置
 
 - 添加 axios，config，请求统一 loading，antd-UI --?
