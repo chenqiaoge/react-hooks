@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Login from '@/views/login'
-import Main from '@/components/common/layout.jsx'
+import Main from '@/components/common/layout/layout.jsx'
 
 function Root(props) {
   return (

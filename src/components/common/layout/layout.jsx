@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Layout, Breadcrumb } from 'antd'
-import SideBar from './sideBar'
 import WrapRouter from '@/router'
+import SideBar from '../sideBar/sideBar'
 
 import routes from '@/router/routeConfig' // 全量routes
 import routesApi from '@/router/routesMock'
 import _ from 'lodash'
 import { flatChildren } from '@/utils'
-import '@/App.scss'
+import '@/App.less'
 
 const { Header, Content, Sider } = Layout
 
@@ -83,7 +83,6 @@ function LayoutComponent(props) {
         </Header>
         <Content style={{ margin: '0 16px' }}>
           <div className='site-layout-background' style={{ padding: 24, minHeight: 360 }}>
-            <div>content</div>
             <WrapRouter name='content' routeList={trueRoute} />
           </div>
         </Content>

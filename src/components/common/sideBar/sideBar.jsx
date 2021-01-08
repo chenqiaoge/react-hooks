@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { Menu } from 'antd'
 import {
   PieChartOutlined,
-  DesktopOutlined,
-  FileOutlined,
-  TeamOutlined,
+  // DesktopOutlined,
+  // FileOutlined,
+  // TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 
-import '@/assets/sideBar.scss'
+import './sideBar.less'
 
 const { SubMenu } = Menu
 

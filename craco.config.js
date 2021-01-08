@@ -12,7 +12,8 @@ module.exports = {
     alias: {
       '@': pathResolve('src'),
       '@store': pathResolve('src/store'),
-      '@utils': pathResolve('src/utils')
+      '@utils': pathResolve('src/utils'),
+      '@common': pathResolve('src/components/common'),
     },
     plugins: [],
     configure: (config, { env, paths }) => {

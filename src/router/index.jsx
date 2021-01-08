@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useCallback } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
+import WhiteSpace from '@common/whiteSpace/whiteSpace.jsx'
 // import routes from './routeConfig'
 
 // 优化的wrapRoute,筛选后的routeList生成route组件
@@ -8,15 +9,27 @@ export default function WrapRouter(props) {
   const { routeList } = props
   let location = useLocation()
   let history = useHistory()
+  const whiteArr = ['/home/drag']
   const createdRoute = routeList.map((item, index) => {
-    return <Route key={index} {...item} />
+    // console.log('---:', item.path, location.pathname)
+    if (whiteArr.includes(item.path)) {
+      return <Route key={index} {...item} />
+    }
+    if (location.pathname === item.path) {
+      return (
+        <WhiteSpace>
+          <Route key={index} {...item} />
+        </WhiteSpace>
+      )
+    }
+    return null
   })
   const changeBread = useCallback(() => {
     // 路由变化，changeBread
     console.log('change store bread')
     // 路由拦截
     if (location.pathname === '/inbox') {
-      console.log('拦截了')
+      console.log('拦截了!!')
       history.push('/inbox')
     }
   }, [history, location.pathname])
